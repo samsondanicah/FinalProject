@@ -79,11 +79,12 @@
 
   </style>
 
-
-  <nav class="navbar bg-body-tertiary fixed-top">
+  <nav class="navbar bg-body-tertiary fixed-top d-flex flex-wrap justify-content-center py-1 mb-4 border-bottom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Logo</a>
-      <ul class="ms-auto me-auto pt-2">
+      <%= link_to  client_root_path, class: "navbar-brand d-flex align-items-center mb-4 mb-md-0 me-md-5 text-dark text-decoration-none" do %>
+        <h4>LOGO</h4>
+      <% end %>
+      <ul class="ms-auto">
         <a class="nav-item text-decoration-none text-black me-2" href="#">Coins</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Claim</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Language</a>
@@ -93,7 +94,7 @@
       </ul>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel" >Menu Views</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Views</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -107,15 +108,15 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Coins:</a>
             </li>
-              <button class="btn btn-dark w-100" type="button">Cash In Now</button>
+            <button class="btn btn-dark w-100" type="button">Cash In Now</button>
 
             <div class="dropdown-center mt-2">
               <button class="btn btn-dark w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Settings
+                Settings
               </button>
               <ul class="dropdown-menu ms-auto">
                 <li><a class="dropdown-item" href="#">Contact Us</a></li>
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li class="dropdown-item"><%= link_to 'My Profile', profiles_path, class: "nav-item text-decoration-none text-black me-2" %></li>
                 <li class="dropdown-item"><%= link_to 'Sign out', destroy_client_user_session_path, data: { 'turbo-method': :delete } %></li>
               </ul>
             </div>
@@ -130,11 +131,11 @@
   <nav class="navbar bg-body-tertiary fixed-bottom">
     <div class="container-fluid">
       <ul class="ms-auto me-auto pt-2">
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Share</a>
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Invite</a>
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Lottery</a>
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Shop</a>
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Me</a>
+        <a class="nav-item text-decoration-none text-black me-2" href="#share">Share</a>
+        <a class="nav-item text-decoration-none text-black me-2" href="#invite">Invite</a>
+        <a class="nav-item text-decoration-none text-black me-2" href="#lottery">Lottery</a>
+        <a class="nav-item text-decoration-none text-black me-2" href="#shop">Shop</a>
+        <%= link_to 'Me', profiles_path, class: "nav-item text-decoration-none text-black me-2" %>
       </ul>
     </div>
   </nav>
