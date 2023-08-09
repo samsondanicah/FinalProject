@@ -1,0 +1,26 @@
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model: @user, url: profiles_path do |form| %>
+  <div>
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number %>
+  </div>
+  <div>
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+  <div>
+    <%= form.label :password_field %>
+    <%= form.text_field :password_field %>
+  </div>
+  <%= form.submit %>
+<% end %>
+
+
+
+
