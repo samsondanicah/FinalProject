@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }, as: 'client'
     root 'users/home#index', as: 'client_root'
+    resource :profiles, controller: 'users/profiles'
   end
 
   constraints(AdminDomainConstraint.new) do
