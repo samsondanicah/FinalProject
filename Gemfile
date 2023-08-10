@@ -34,6 +34,8 @@ gem 'devise'
 
 gem 'carrierwave'
 
+gem 'rest-client'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
