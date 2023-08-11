@@ -1,6 +1,6 @@
-<div class="container w-50">
+<div class="container w-50" style="margin-top: 200px">
   <div class="offcanvas-body">
-    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+    <ul class="navbar-nav justify-content-end flex-grow-2 pe-5">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="#">Username:</a>
       </li>
@@ -16,11 +16,10 @@
 
         <div class="justify-content-center row">
           <div class=" col-6">
-
-            <%= link_to 'Edit Profile', edit_profiles_path, class: "btn btn-dark w-100"%>
+            <%= link_to 'Edit Profile', edit_profiles_path, class: "btn btn-dark w-100" %>
           </div>
           <div class=" col-6 ">
-            <button class="btn btn-dark col-6 w-100" type="button">Address</button>
+            <%= link_to 'Address', addresses_path, class: "btn btn-dark w-100" %>
           </div>
         </div>
     </ul>

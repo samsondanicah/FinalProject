@@ -1,26 +1,26 @@
-<% if @user.errors.any? %>
-  <ul>
-    <% @user.errors.each do |error| %>
-      <li><%= error.full_message %></li>
-    <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @user, url: profiles_path do |form| %>
-  <div>
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
-  <div>
-    <%= form.label :username %>
-    <%= form.text_field :username %>
-  </div>
-  <div>
-    <%= form.label :password_field %>
-    <%= form.text_field :password_field %>
-  </div>
-  <%= form.submit %>
-<% end %>
+<body class="d-flex align-items-center  ">
+<main class="form-signin w-100 m-auto border border-opacity-75 rounded-end-5 rounded-start-5 border border-success">
 
+  <%= form_with model: @user, url: profiles_path, method: 'put' do |form| %>
+    <div class="mb-3 align">
+      <%= form.label :phone_number %>
+      <%= form.text_field :phone_number %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :username %>
+      <%= form.text_field :username %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password %>
+      <%= form.text_field :password_field %>
+    </div>
+
+    <%= form.submit %>
+  <% end %>
+</main>
+</body>
 
 
 
