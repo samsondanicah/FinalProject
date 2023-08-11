@@ -1,0 +1,29 @@
+
+<table class="table table-sm">
+  <thead>
+  <td>Genre</td>
+  <td>Name</td>
+  <td>Street Address</td>
+  <td>Phone Number</td>
+  <td>Remark</td>
+  <td>Default</td>
+  <td>Address</td>
+  </thead>
+  <% @addresses.each do |address| %>
+    <tr>
+      <td><%= address.genre %></td>
+      <td><%= address.name %></td>
+      <td><%= address.street_address %></td>
+      <td><%= address.phone_number %></td>
+      <td><%= address.remark %></td>
+      <td><%= address.is_default %></td>
+      <td><%= "#{address.region&.name} #{address.province&.name} #{address.city&.name} #{address.barangay&.name}" %></td>
+      <td>
+        <%= link_to 'Edit', edit_address_path(address) %>
+        <%= button_to 'Delete', address_path(address), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'new', new_address_path%>

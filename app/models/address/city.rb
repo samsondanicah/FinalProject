@@ -4,4 +4,5 @@ class Address::City < ApplicationRecord
 
   belongs_to :province
   has_many :barangays
+  has_many :addresses, class_name: 'Address', foreign_key: 'address_city_id'
 end
