@@ -2,7 +2,7 @@ class Users::AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
-    @addresses = current_client_user.addresses.all
+    @addresses = current_client_user.addresses
   end
 
   def new

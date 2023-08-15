@@ -4,5 +4,4 @@ class Address::Province < ApplicationRecord
 
   belongs_to :region
   has_many :cities
-  has_many :user, class_name: 'User', foreign_key: 'address_province_id'
 end
