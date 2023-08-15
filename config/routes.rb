@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       sessions: 'admin/sessions'
     }, as: 'admin'
     root 'admin/home#index', as: 'admin_root'
+    resources :users, only: :index, controller: 'admin/users'
   end
 
   namespace :api do
