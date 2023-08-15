@@ -10,8 +10,8 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }, as: 'client'
     root 'users/home#index', as: 'client_root'
-    # root 'users/welcome#index', as: 'client_root'
     resource :profiles, controller: 'users/profiles'
+    resource :invite, controller: 'users/invites'
     resources :addresses, except: :show, controller: 'users/addresses'
   end
 

@@ -76,9 +76,7 @@
       .carousel-item {
           height: 35rem;
       }
-
   </style>
-
   <nav class="navbar bg-body-tertiary fixed-top d-flex flex-wrap justify-content-center py-1 mb-4 border-bottom">
     <div class="container-fluid">
       <%= link_to  client_root_path, class: "navbar-brand d-flex align-items-center mb-4 mb-md-0 me-md-5 text-dark text-decoration-none" do %>
@@ -132,7 +130,7 @@
     <div class="container-fluid">
       <ul class="ms-auto me-auto pt-2">
         <a class="nav-item text-decoration-none text-black me-2" href="#">Share</a>
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Invite</a>
+        <%= link_to 'Invite', invite_path, class: "nav-item text-decoration-none text-black me-2" %>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Lottery</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Shop</a>
         <%= link_to 'Me', profiles_path, class: "nav-item text-decoration-none text-black me-2" %>
