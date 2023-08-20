@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_130237) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_003221) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -66,12 +66,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_130237) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "categories", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "date_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", charset: "utf8mb4", force: :cascade do |t|
+    t.string "image"
+    t.string "name"
+    t.integer "quantity"
+    t.integer "minimum_bets"
+    t.string "state"
+    t.integer "batch_count"
+    t.datetime "online_at"
+    t.datetime "offline_at"
+    t.datetime "start_at"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "username"
     t.integer "role", default: 0
     t.string "phone"
     t.integer "coins"
@@ -80,9 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_130237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
-    t.bigint "addresses_id"
     t.bigint "parent_id"
-    t.index ["addresses_id"], name: "index_users_on_addresses_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
