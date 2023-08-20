@@ -1,0 +1,60 @@
+<%= form_with model: item, url: path, data: { controller: :location, turbo: false } do |form| %>
+
+  <div class="row">
+    <div class=" col-4">
+      <%= form.label :image, class: 'form-label' %>
+      <%= form.file_field :image, class: 'form-control' %>
+    </div>
+    <div class=" col-4">
+      <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class=" col-4">
+      <%= form.label :quantity, class: 'form-label' %>
+      <%= form.number_field :quantity, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <%= form.label :minimum_bets, class: 'form-label' %>
+      <%= form.number_field :minimum_bets, class: 'form-control' %>
+    </div>
+
+    <div class="col-4">
+      <%= form.label :batch_count, class: 'form-label' %>
+      params
+      <%= form.number_field :batch_count, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <%= form.label :online_at, class: 'form-label' %>
+      <%= form.date_field :online_at, autofocus: true, autocomplete: "online_at", class: 'form-control' %>
+    </div>
+    <div class="col-4">
+      <%= form.label :offline_at, class: 'form-label' %>
+      <%= form.date_field :offline_at, autofocus: true, autocomplete: "offline_at", class: 'form-control' %>
+    </div>
+    <div class="col-4">
+      <%= form.label :start_at, class: 'form-label' %>
+      <%= form.time_field :start_at, autofocus: true, autocomplete: "start_at", class: 'form-control' %>
+    </div>
+  </div>
+
+  <div>
+    <% Item.statuses.each do |status, value| %>
+      <%= form.label status.humanize %>
+      <%= form.radio_button :status, status, checked: item.status == status %>
+    <% end %>
+  </div>
+
+  <div class="form-check-label">
+    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit" %>
+  </div>
+<% end %>
