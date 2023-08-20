@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     }, as: 'admin'
     root 'admin/home#index', as: 'admin_root'
     resources :users, only: :index, controller: 'admin/users'
+    resources :categories
+    resources :items, controller: 'admin/items'
   end
 
   namespace :api do
