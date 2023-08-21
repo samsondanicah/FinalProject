@@ -13,7 +13,7 @@ class Admin::ItemsController < AdminController
     @item = Item.new(item_params)
     if @item.save
       flash[:notice] = 'Item created successfully'
-      redirect_to item_path
+      redirect_to items_path
     else
       flash.now[:alert] = 'Item create failed'
       render :new

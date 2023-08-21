@@ -1,4 +1,12 @@
-<%= form_with model: item, url: path, data: { controller: :location, turbo: false } do |form| %>
+<%= form_with(model: item, url: url, method: method, data: { turbo: false }) do |form| %>
+
+  <% if item.errors.any? %>
+    <ul>
+      <% item.errors.each do |error| %>
+        <li class="white"><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <div class="row">
     <div class=" col-4">
@@ -21,40 +29,48 @@
       <%= form.number_field :minimum_bets, class: 'form-control' %>
     </div>
 
-    <div class="col-4">
-      <%= form.label :batch_count, class: 'form-label' %>
-      params
-      <%= form.number_field :batch_count, class: 'form-control' %>
-    </div>
-  </div>
+      <div class="col-4">
+        <%= form.label :state, class: 'form-label' %>
+        <%= form.collection_select :state_id,
+                                   Item.aasm.events.map(&:name), :itself, :capitalize,
+                                   { prompt: 'Select a state' }, class: 'form-control' %>
+      </div>
 
-  <div class="row">
-    <div class="col-4">
-      <%= form.label :online_at, class: 'form-label' %>
-      <%= form.date_field :online_at, autofocus: true, autocomplete: "online_at", class: 'form-control' %>
+      <div class="col-4">
+        <%= form.label :batch_count, class: 'form-label' %>
+        params
+        <%= form.number_field :batch_count, class: 'form-control' %>
+      </div>
     </div>
-    <div class="col-4">
-      <%= form.label :offline_at, class: 'form-label' %>
-      <%= form.date_field :offline_at, autofocus: true, autocomplete: "offline_at", class: 'form-control' %>
+
+    <div class="row">
+      <div class="col-4">
+        <%= form.label :online_at, class: 'form-label' %>
+        <%= form.date_field :online_at, autofocus: true, autocomplete: "online_at", class: 'form-control' %>
+      </div>
+      <div class="col-4">
+        <%= form.label :offline_at, class: 'form-label' %>
+        <%= form.date_field :offline_at, autofocus: true, autocomplete: "offline_at", class: 'form-control' %>
+      </div>
+      <div class="col-4">
+        <%= form.label :start_at, class: 'form-label' %>
+        <%= form.time_field :start_at, autofocus: true, autocomplete: "start_at", class: 'form-control' %>
+      </div>
     </div>
-    <div class="col-4">
-      <%= form.label :start_at, class: 'form-label' %>
-      <%= form.time_field :start_at, autofocus: true, autocomplete: "start_at", class: 'form-control' %>
+
+    <div>
+      <% Item.statuses.each do |status, value| %>
+        <%= form.label status.humanize %>
+        <%= form.radio_button :status, status, checked: item.status == status %>
+      <% end %>
     </div>
-  </div>
 
-  <div>
-    <% Item.statuses.each do |status, value| %>
-      <%= form.label status.humanize %>
-      <%= form.radio_button :status, status, checked: item.status == status %>
-    <% end %>
-  </div>
+    <div class="form-check-label">
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    </div>
 
-  <div class="form-check-label">
-    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Submit" %>
-  </div>
+    <div class="actions">
+      <%= form.submit "Submit" %>
+    </div>
 <% end %>
+</div>

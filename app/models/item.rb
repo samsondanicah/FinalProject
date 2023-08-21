@@ -3,7 +3,9 @@ class Item < ApplicationRecord
 
   validates :image, :name, :quantity, :minimum_bets, :batch_count, :online_at, :offline_at, :start_at, presence: :true
 
-  belongs_to :user
+  has_many :item_category_ship
+
+  belongs_to :user, optional: true
 
   default_scope { where(deleted_at: nil) }
 
