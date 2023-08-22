@@ -14,11 +14,11 @@
   </thead>
   <% @item.each do |item| %>
     <tr>
-      <td><%= image_tag item.image.url, width: "100px", height: "100px" if item.image.present? %></td>
+      <td><%= image_tag item.image.url,class: "avatar-image", style: "width: 150px; height: 150px;" if item.image.present? %></td>
       <td><%= item.name %></td>
       <td><%= item.quantity %></td>
       <td><%= item.minimum_bets %></td>
-      <td><%= item.state%></td>
+      <td><%= item.state %></td>
       <td><%= item.batch_count %></td>
       <td><%= item.online_at %></td>
       <td><%= item.offline_at %></td>
