@@ -1,2 +1,0 @@
-class PostCategoryShip < ApplicationRecord
-end
