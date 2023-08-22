@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: {
       sessions: 'users/sessions',
@@ -21,24 +17,32 @@ Rails.application.routes.draw do
     }, as: 'admin'
     root 'admin/home#index', as: 'admin_root'
     resources :users, only: :index, controller: 'admin/users'
-    resources :categories
-    resources :items, controller: 'admin/items'
-  end
-
-  namespace :api do
-    namespace :v1 do
-      resources :regions, only: %i[index show], defaults: { format: :json } do
-        resources :provinces, only: :index, defaults: { format: :json }
+    resources :categories, controller: 'admin/categories'
+    resources :items, controller: 'admin/items' do
+        patch :start
+        patch :pause
+        patch :end
+        patch :cancel
       end
-      resources :provinces, only: %i[index show], defaults: { format: :json } do
-        resources :cities, only: :index, defaults: { format: :json }
-      end
+    end
 
-      resources :cities, only: %i[index show], defaults: { format: :json } do
-        resources :barangays, only: :index, defaults: { format: :json }
-      end
+    namespace :api do
+      namespace :v1 do
+        resources :regions, only: %i[index show], defaults: { format: :json } do
+          resources :provinces, only: :index, defaults: { format: :json }
+        end
+        resources :provinces, only: %i[index show], defaults: { format: :json } do
+          resources :cities, only: :index, defaults: { format: :json }
+        end
 
-      resources :barangays, only: %i[index show], defaults: { format: :json }
+        resources :cities, only: %i[index show], defaults: { format: :json } do
+          resources :barangays, only: :index, defaults: { format: :json }
+        end
+
+        resources :barangays, only: %i[index show], defaults: { format: :json }
+      end
     end
   end
-end
+
+
+
