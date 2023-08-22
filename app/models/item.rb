@@ -3,23 +3,17 @@ class Item < ApplicationRecord
 
   validates :image, :name, :quantity, :minimum_bets, :batch_count, :online_at, :offline_at, :start_at, presence: :true
 
-  has_many :item_category_ship
+  has_many :items_category_ships
+  has_many :categories, through: :items_category_ships
 
-  belongs_to :user, optional: true
+  validates :name, presence: true
+  validates :quantity, presence: true
 
   default_scope { where(deleted_at: nil) }
 
   mount_uploader :image, ImageUploader
   enum status: { active: 0, inactive: 1 }
 
-  # pending -> starting
-  # starting -> paused
-  # starting -> ended
-  # starting -> cancelled
-  # paused -> starting
-  # paused -> cancelled
-  # ended -> starting
-  # cancelled -> starting
 
   aasm column: :state do
     state :pending, initial: true
