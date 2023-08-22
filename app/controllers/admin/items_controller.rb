@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :set_item, except: [:index, :new, :create]
 
   def index
-    @item = Item.all
+    @item = Item.new
   end
 
   def new
@@ -16,7 +16,7 @@ class Admin::ItemsController < AdminController
       redirect_to items_path
     else
       flash.now[:alert] = 'Item create failed'
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,25 +25,21 @@ class Admin::ItemsController < AdminController
   def update
     if @item.update(item_params)
       flash[:notice] = 'Item updated successfully'
-      redirect_to item_path
+      redirect_to items_path
     else
       flash.now[:alert] = 'Item update failed'
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @item.destroy
+    @item.destroy
       flash[:notice] = 'Item deleted successfully'
-    else
-      flash[:alert] = 'Item deleted failed'
-    end
-    redirect_to item_path
+    redirect_to items_path
   end
 
   def start
-    @item = Item.find(item_params)
-    if @item.start
+    if @item.may_start?
       flash[:notice] = 'Task start successfully.'
     else
       flash[:alert] = 'Start item failed'
