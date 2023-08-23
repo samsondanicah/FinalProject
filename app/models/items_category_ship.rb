@@ -1,6 +1,4 @@
 class ItemsCategoryShip < ApplicationRecord
-
-  has_many :items
-  has_many :category
-
+  belongs_to :item
+  belongs_to :category
 end

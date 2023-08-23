@@ -27,12 +27,12 @@ class Item < ApplicationRecord
       transitions from: :starting, to: :paused
     end
 
-    event :ended do
+    event :end do
       transitions from: :starting, to: :ended
     end
 
-    event :cancelled do
-      transitions from: :starting, to: :cancelled
+    event :cancel do
+      transitions from: [:starting, :paused], to: :cancelled
     end
 
   end
