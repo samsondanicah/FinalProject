@@ -79,16 +79,16 @@
   </style>
   <nav class="navbar bg-body-tertiary fixed-top d-flex flex-wrap justify-content-center py-1 mb-4 border-bottom">
     <div class="container-fluid">
-      <%= link_to  client_root_path, class: "navbar-brand d-flex align-items-center mb-4 mb-md-0 me-md-5 text-dark text-decoration-none" do %>
+      <%= link_to client_root_path, class: "navbar-brand d-flex align-items-center mb-4 mb-md-0 me-md-5 text-dark text-decoration-none" do %>
         <h4>LOGO</h4>
       <% end %>
       <ul class="ms-auto">
         <a class="nav-item text-decoration-none text-black me-2" href="#">Coins</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Claim</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Language</a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
       </ul>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
@@ -119,8 +119,6 @@
               </ul>
             </div>
           </ul>
-          </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -131,9 +129,9 @@
       <ul class="ms-auto me-auto pt-2">
         <a class="nav-item text-decoration-none text-black me-2" href="#">Share</a>
         <%= link_to 'Invite', invite_path, class: "nav-item text-decoration-none text-black me-2" %>
-        <a class="nav-item text-decoration-none text-black me-2" href="#">Lottery</a>
+        <%= link_to 'Lottery', lottery_index_path, class: "nav-item text-decoration-none text-black me-2" %>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Shop</a>
-        <%= link_to 'Me', profiles_path, class: "nav-item text-decoration-none text-black me-2" %>
+        <%= link_to 'Me', profiles_path, class: "nav-item text-decoration-none text-black me-2" if current_client_user %>
       </ul>
     </div>
   </nav>
