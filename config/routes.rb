@@ -6,9 +6,12 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }, as: 'client'
     root 'users/home#index', as: 'client_root'
-    resource :profiles, controller: 'users/profiles'
-    resource :invite, controller: 'users/invites'
-    resources :addresses, except: :show, controller: 'users/addresses'
+    scope module: :users do
+      resource :profiles
+      resource :invite
+      resources :lottery, only: [:index, :show, :create]
+      resources :addresses, except: :show
+    end
   end
 
   constraints(AdminDomainConstraint.new) do
@@ -16,33 +19,35 @@ Rails.application.routes.draw do
       sessions: 'admin/sessions'
     }, as: 'admin'
     root 'admin/home#index', as: 'admin_root'
-    resources :users, only: :index, controller: 'admin/users'
-    resources :categories, controller: 'admin/categories'
-    resources :items, controller: 'admin/items' do
+    scope module: :admin do
+      resources :users, only: :index
+      resources :categories
+      resources :items do
         patch :start
         patch :pause
         patch :end
         patch :cancel
       end
     end
+  end
 
-    namespace :api do
-      namespace :v1 do
-        resources :regions, only: %i[index show], defaults: { format: :json } do
-          resources :provinces, only: :index, defaults: { format: :json }
-        end
-        resources :provinces, only: %i[index show], defaults: { format: :json } do
-          resources :cities, only: :index, defaults: { format: :json }
-        end
-
-        resources :cities, only: %i[index show], defaults: { format: :json } do
-          resources :barangays, only: :index, defaults: { format: :json }
-        end
-
-        resources :barangays, only: %i[index show], defaults: { format: :json }
+  namespace :api do
+    namespace :v1 do
+      resources :regions, only: %i[index show], defaults: { format: :json } do
+        resources :provinces, only: :index, defaults: { format: :json }
       end
+      resources :provinces, only: %i[index show], defaults: { format: :json } do
+        resources :cities, only: :index, defaults: { format: :json }
+      end
+
+      resources :cities, only: %i[index show], defaults: { format: :json } do
+        resources :barangays, only: :index, defaults: { format: :json }
+      end
+
+      resources :barangays, only: %i[index show], defaults: { format: :json }
     end
   end
+end
 
 
 
