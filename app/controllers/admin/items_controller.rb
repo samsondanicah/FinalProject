@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :set_item, except: [:index, :new, :create]
 
   def index
-    @item = Item.new
+    @items = Item.all
   end
 
   def new
@@ -39,45 +39,45 @@ class Admin::ItemsController < AdminController
   end
 
   def start
-    if @item.may_start?
+    if @item.may_start? && @item.start!
       flash[:notice] = 'Task start successfully.'
     else
-      flash[:alert] = 'Start item failed'
+      flash[:alert] = "Start item failed: #{@item.errors.full_messages.join(', ')}"
     end
-    redirect_to admin_items_path
+    redirect_to items_path
   end
 
   def pause
-    if @item.pause
+    if @item.may_pause? && @item.pause!
       flash[:notice] = 'Task paused successfully.'
     else
       flash[:alert] = 'Paused item failed'
     end
-    redirect_to admin_items_path
+    redirect_to items_path
   end
 
   def end
-    if @item.end
+    if @item.may_end? && @item.end!
       flash[:notice] = 'Task ended successfully.'
     else
       flash[:alert] = 'Ended item failed'
     end
-    redirect_to admin_items_path
+    redirect_to items_path
   end
 
   def cancel
-    if @item.cancel
+    if @item.may_cancel? && @item.cancel!
       flash[:notice] = 'Task cancelled successfully.'
     else
       flash[:alert] = 'Cancelled item failed'
     end
-    redirect_to admin_items_path
+    redirect_to items_path
   end
 
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id] || params[:item_id])
   end
 
   def item_params
