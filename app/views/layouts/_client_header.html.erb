@@ -80,17 +80,18 @@
   <nav class="navbar bg-body-tertiary fixed-top d-flex flex-wrap justify-content-center py-1 mb-4 border-bottom">
     <div class="container-fluid">
       <%= link_to client_root_path, class: "navbar-brand d-flex align-items-center mb-4 mb-md-0 me-md-5 text-dark text-decoration-none" do %>
-        <h4>LOGO</h4>
+        <h4><%= client_user_signed_in? ? 'LOGO' : 'Brand Image' %></h4>
       <% end %>
-      <ul class="ms-auto">
+      <ul class="ms-auto mt-3">
         <a class="nav-item text-decoration-none text-black me-2" href="#">Coins</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Claim</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Language</a>
-          <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
       </ul>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <% if client_user_signed_in? %>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Views</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -98,13 +99,13 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Username:</a>
+              <a class="nav-link active" aria-current="page" href="#">Username: <%= current_client_user.username %></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Email:</a>
+              <a class="nav-link active" aria-current="page" href="#">Email: <%= current_client_user.email %></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Coins:</a>
+              <a class="nav-link active" aria-current="page" href="#">Coins: <%= current_client_user.coins.present? ? current_client_user.coins : '0' %></a>
             </li>
             <button class="btn btn-dark w-100" type="button">Cash In Now</button>
 
@@ -121,6 +122,7 @@
           </ul>
         </div>
       </div>
+      <% end %>
     </div>
   </nav>
 
