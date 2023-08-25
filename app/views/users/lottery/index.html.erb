@@ -1,0 +1,78 @@
+<div class="container">
+  <div id="myCarousel" class="carousel slide mt-2" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="150%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <img src="https://thehappytrip.com/wp-content/uploads/2019/05/SanAntonioZambalesjf9052_08.jpg" class="img-fluid" width="">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Another example headline.</h1>
+            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+        </svg>
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>One more for good measure.</h1>
+            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="alert alert-dark" role="alert">
+    Announcement:
+  </div>
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-outline-success">Button</button>
+  </div>
+</div>
+
+<div class="container marketing " style="height: 1000px">
+  <%= link_to 'All', lottery_index_path, class: 'btn btn-secondary' %>
+  <% Category.all.each do |category| %>
+    <%= link_to category.name, lottery_index_path(category: category), class: 'btn btn-secondary' %>
+  <% end %>
+  <div class="row">
+    <% @items.each do |item| %>
+      <%= link_to lottery_path(item) do %>
+        <div class="col-3 mb-5">
+          <div class="card" style="width: 18rem;">
+            <%= image_tag item.image.url, width: "100px", height: "100px", class: "card-img-top" if item.image.present? %>
+            <div class="card-body">
+              <%= item.name %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
