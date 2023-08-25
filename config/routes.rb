@@ -28,6 +28,11 @@ Rails.application.routes.draw do
         patch :end
         patch :cancel
       end
+      resources :bets, only: [:index] do
+        patch :won
+        patch :lost
+        patch :cancel
+      end
     end
   end
 
