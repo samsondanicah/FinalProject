@@ -1,0 +1,3 @@
+class Bet < ApplicationRecord
+
+end
