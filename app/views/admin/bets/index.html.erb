@@ -1,0 +1,29 @@
+<div>
+  <table class="table table-dark table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>Item</th>
+      <th>User</th>
+      <th>Batch_Count</th>
+      <th>Coins</th>
+      <th>State</th>
+      <th>Serial Number</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+
+    <% @bets.each do |bet| %>
+      <tr>
+        <td><%= bet.item.name %></td>
+        <td><%= bet.user.email %></td>
+        <td><%= bet.batch_count %></td>
+        <td><%= bet.coins %></td>
+        <td><%= bet.state %></td>
+        <td><%= bet.serial_number %></td>
+        <td><%= button_to 'Cancel', cancel_bet_path(bet), method: :patch, class: "btn btn-danger" if bet.betting? %></td>
+      </tr>
+    <% end %>
+    </body>
+  </table>
+</div>
+
