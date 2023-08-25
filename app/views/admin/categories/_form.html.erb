@@ -1,5 +1,11 @@
-<%= form_with(model: category, url: url, method: method, data: { turbo: false}) do |form|  %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.submit %>
+<%= form_with(model: category, url: url, method: method, data: { turbo: false }) do |form| %>
+  <div>
+    <%= form.label :name %>
+
+    <%= form.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>
+
