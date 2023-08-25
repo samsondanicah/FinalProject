@@ -1,74 +1,50 @@
-<nav class="navbar bg-body-secondary fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Brand Image</a>
-    <ul class="ms-auto me-auto pt-2">
-      <a class="nav-item text-decoration-none text-black me-2" href="#">Coins</a>
-      <a class="nav-item text-decoration-none text-black me-2" href="#">Claim</a>
-      <a class="nav-item text-decoration-none text-black me-2" href="#">Language</a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </ul>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-            <%= link_to 'Sign out', destroy_client_user_session_path, data: { 'turbo-method': :delete } %>
-          </li>
-      </div>
-    </div>
-</nav>
+<div class="d-flex align-items-center py-4 bg-body-secondary">
+  <main class="form-signin w-100 mt-5 container">
+    <%= form_for(resource, as: resource_name, method: :post, url: client_user_registration_path) do |f| %>
+      <% if resource.errors.any? %>
+        <ul>
+          <% resource.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <h1 class="text-center h3 mb-3 fw-normal">Client Register</h1>
 
-<body class="d-flex align-items-center py-4 bg-body-secondary">
-<main class="form-signin w-100 mt-2">
-  <%= form_for(resource, as: resource_name, method: :post, url: client_user_registration_path) do |f| %>
-    <% if resource.errors.any? %>
-      <ul>
-        <% resource.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <div class="btn-group w-100" class="mt-2">
+        <%= link_to "Login", new_client_user_session_path, class: "btn btn-secondary" %>
+        <%= link_to "Register", new_client_user_registration_path, class: "btn btn-secondary" %>
+      </div>
+
+      <div class="form-floating mt-2">
+        <%= text_field_tag :promoter_email, cookies[:promoter], autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= label_tag :promoter_email %>
+      </div>
+
+      <div class="form-floating mt-2">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= f.label :email %>
+      </div>
+
+      <div class="form-floating mt-2">
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="form-floating mt-2">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        <%= f.label :password_confirmation %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check text-start my-3">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, class: "form-check-label" %>
+        </div>
+      <% end %>
+      <div class="mt-2"><%= f.submit 'Sign Up', class: 'btn btn-secondary w-100' %></div>
     <% end %>
-    <h1 class="text-center h3 mb-3 fw-normal">Client Register</h1>
-
-    <div class="btn-group w-100" class="mt-2">
-      <%= link_to "Login", new_client_user_session_path, class: "btn btn-secondary" %>
-      <%= link_to "Register", new_client_user_registration_path, class: "btn btn-secondary" %>
-    </div>
-
-    <div class="form-floating mt-2">
-      <%= text_field_tag :promoter_email, cookies[:promoter], autofocus: true, autocomplete: "email", class: "form-control" %>
-      <%= label_tag :promoter_email %>
-    </div>
-
-    <div class="form-floating mt-2">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-    </div>
-
-    <div class="form-floating mt-2">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-    </div>
-
-    <div class="form-floating mt-2">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="form-check text-start my-3">
-        <%= f.check_box :remember_me, class: "form-check-input" %>
-        <%= f.label :remember_me, class: "form-check-label" %>
-      </div>
-    <% end %>
-    <div class="mt-2"><%= f.submit 'Sign Up', class: 'btn btn-secondary w-100' %></div>
-  <% end %>
-</main>
-</body>
+  </main>
+</div>
 
 
 
