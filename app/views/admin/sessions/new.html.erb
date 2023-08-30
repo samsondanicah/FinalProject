@@ -1,8 +1,7 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
-
-<main class="form-signin w-100 m-auto">
+<main class="form-signin w-100 mt-5 container">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <h1 class="text-center h3 mb-3 fw-normal" >Admin Login</h1>
+    <h1 class="text-center h3 mb-3 fw-normal">Admin Login</h1>
 
     <div class="form-floating mt-2">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
@@ -22,7 +21,6 @@
     <% end %>
 
     <div class="mt-2"><%= f.submit "Sign in", class: "btn btn-secondary w-100" %></div>
-
   <% end %>
 </main>
 </body>

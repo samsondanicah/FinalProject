@@ -1,3 +1,4 @@
+<%= render partial: 'form', locals: { bets: @bets, url: bets_path, method: :get } %>
 <div>
   <table class="table table-dark table-hover">
     <thead class="table-dark">
@@ -11,7 +12,6 @@
       <th>Action</th>
     </tr>
     </thead>
-
     <% @bets.each do |bet| %>
       <tr>
         <td><%= bet.item.name %></td>
@@ -20,7 +20,7 @@
         <td><%= bet.coins %></td>
         <td><%= bet.state %></td>
         <td><%= bet.serial_number %></td>
-        <td><%= button_to 'Cancel', cancel_bet_path(bet), method: :patch, class: "btn btn-danger" if bet.betting? %></td>
+        <td><%= button_to 'Cancel', bet_cancel_path(bet), method: :patch, class: "btn btn-danger" if bet.betting? %></td>
       </tr>
     <% end %>
     </body>
