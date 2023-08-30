@@ -3,6 +3,7 @@ class Item < ApplicationRecord
 
   validates :image, :name, :quantity, :minimum_bets, :batch_count, :online_at, :offline_at, :start_at, presence: :true
 
+  has_many :bets
   has_many :items_category_ships
   has_many :categories, through: :items_category_ships
 

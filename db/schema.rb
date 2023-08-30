@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_23_234937) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_26_005850) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -67,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_234937) do
   end
 
   create_table "bets", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "items_id"
     t.bigint "user_id"
     t.integer "batch_count"
     t.integer "coins", default: 1
@@ -75,7 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_234937) do
     t.string "serial_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["items_id"], name: "index_bets_on_items_id"
+    t.bigint "item_id"
+    t.index ["item_id"], name: "index_bets_on_item_id"
     t.index ["user_id"], name: "index_bets_on_user_id"
   end
 
@@ -121,13 +121,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_234937) do
     t.string "username"
     t.integer "role", default: 0
     t.string "phone"
-    t.integer "coins"
     t.float "total_deposit"
     t.integer "children_members"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
     t.bigint "parent_id"
+    t.integer "coins", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
