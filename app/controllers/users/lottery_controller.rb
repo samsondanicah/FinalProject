@@ -8,7 +8,7 @@ class Users::LotteryController < ApplicationController
     def show
       @item = Item.find(params[:id])
       @bet = Bet.new
-      @bets = current_user.bets.where(item: @item, batch_count: @item.batch_count)
+      @bets = current_client_user.bets.where(item: @item, batch_count: @item.batch_count)
       @progress = (Bet.where(item: @item, batch_count: @item.batch_count).count/@item.minimum_bets.to_f) * 100
     end
 
@@ -19,7 +19,7 @@ class Users::LotteryController < ApplicationController
                          user_id: current_client_user.id, item_id: params[:item_id])
       end
       flash[:notice] = 'Bet Successfully'
-      redirect_to client_lottery_path(id: params[:item_id])
+      redirect_to lottery_index_path
     end
   end
 
