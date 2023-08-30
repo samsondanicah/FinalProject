@@ -86,42 +86,43 @@
         <a class="nav-item text-decoration-none text-black me-2" href="#">Coins</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Claim</a>
         <a class="nav-item text-decoration-none text-black me-2" href="#">Language</a>
+        <%= link_to 'Sign in', new_client_user_session_path, class: "nav-item text-decoration-none text-black me-2" if !client_user_signed_in? %>
       </ul>
       <% if client_user_signed_in? %>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Views</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Username: <%= current_client_user.username %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Email: <%= current_client_user.email %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Coins: <%= current_client_user.coins.present? ? current_client_user.coins : '0' %></a>
-            </li>
-            <button class="btn btn-dark w-100" type="button">Cash In Now</button>
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Views</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Username: <%= current_client_user.username %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Email: <%= current_client_user.email %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Coins: <%= current_client_user.coins.present? ? current_client_user.coins : '0' %></a>
+              </li>
+              <button class="btn btn-dark w-100" type="button">Cash In Now</button>
 
-            <div class="dropdown-center mt-2">
-              <button class="btn btn-dark w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Settings
-              </button>
-              <ul class="dropdown-menu ms-auto">
-                <li><a class="dropdown-item" href="#">Contact Us</a></li>
-                <li class="dropdown-item"><%= link_to 'My Profile', profiles_path, class: "nav-item text-decoration-none text-black me-2" %></li>
-                <li class="dropdown-item"><%= link_to 'Sign out', destroy_client_user_session_path, data: { 'turbo-method': :delete } %></li>
-              </ul>
-            </div>
-          </ul>
+              <div class="dropdown-center mt-2">
+                <button class="btn btn-dark w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Settings
+                </button>
+                <ul class="dropdown-menu ms-auto">
+                  <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                  <li class="dropdown-item"><%= link_to 'My Profile', profiles_path, class: "nav-item text-decoration-none text-black me-2" %></li>
+                  <li class="dropdown-item"><%= link_to 'Sign out', destroy_client_user_session_path, data: { 'turbo-method': :delete } %></li>
+                </ul>
+              </div>
+            </ul>
+          </div>
         </div>
-      </div>
       <% end %>
     </div>
   </nav>
